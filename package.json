@@ -2,16 +2,22 @@
   "name": "kanban_app",
   "version": "1.0.0",
   "description": "The kanban board application from survice js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:7er/kanban_app.git"
+  },
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "start": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "html-webpack-plugin": "^2.7.1",
-    "webpack": "^1.12.11"
+    "webpack": "^1.12.11",
+    "webpack-dev-server": "^1.14.1"
   }
 }
