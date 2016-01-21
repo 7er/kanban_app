@@ -1,8 +1,8 @@
 require('./main.css');
-var component = require('./component');
+import component from './component';
 var app = document.createElement('div');
 
-if (true) {
+if (false) {  
   throw "error";
 }
 

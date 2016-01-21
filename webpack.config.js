@@ -12,16 +12,26 @@ const PATHS = {
 const common = {
   // path to stuff to build
   entry: PATHS.app,
+  // used for require/import without extension
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
   output: {
     path: PATHS.build,
     filename: 'bundle.js'
   },
   module: {
     loaders: [
-      {
+      
+      { // css
         test: /\.css$/,
         loaders: ['style', 'css'],
         // include: (path|[path1,path2...,pathN])
+        include: PATHS.app
+      },
+      { // js (to support ES6), jsx (to support React)
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       }
     ]
