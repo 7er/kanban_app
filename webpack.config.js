@@ -16,6 +16,16 @@ const common = {
     path: PATHS.build,
     filename: 'bundle.js'
   },
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css'],
+        // include: (path|[path1,path2...,pathN])
+        include: PATHS.app
+      }
+    ]
+  },
   plugins: [
     new HtmlwebpackPlugin({
       title: 'Kanban app'
