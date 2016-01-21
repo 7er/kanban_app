@@ -34,7 +34,9 @@ const common = {
 };
 
 if (TARGET == 'start' || !TARGET) {
-  module.exports = merge(common, {});
+  module.exports = merge(common, {
+    devtool: 'eval-source-map'
+  });
 }
 if (TARGET == 'build') {
   module.exports = merge(common, {});
