@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+
+const TARGET = process.env.npm_lifecycle_event;
 
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
 };
 
-module.exports = {
+const common = {
+  // path to stuff to build
   entry: PATHS.app,
   output: {
     path: PATHS.build,
@@ -18,3 +22,10 @@ module.exports = {
     })
   ]
 };
+
+if (TARGET == 'start' || !TARGET) {
+  module.exports = merge(common, {});
+}
+if (TARGET == 'build') {
+  module.exports = merge(common, {});
+}
