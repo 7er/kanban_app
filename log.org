@@ -1,0 +1,8 @@
+* setup
+** setup npm 
+** setup webpack
+** setup html-webpack-plugin
+   it can create index.html
+** configure webpack to
+   - build build/bundle.js from app/*.js
+   - generate build/index.html (using HtmlwebpackPlugin)
