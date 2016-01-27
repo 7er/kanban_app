@@ -1,5 +1,6 @@
 import React from 'react';
-import {div, input} from './tags';
+import h from 'react-hyperscript'
+const { button, input, div, ul, li, span, h1 } = require('hyperscript-helpers')(h);
 
 export default class Note extends React.Component {
   constructor(props) {
@@ -17,15 +18,22 @@ export default class Note extends React.Component {
   renderEdit() {
     return input({
       type: "text",
+      ref: (input) => input ? input.selectionEnd = this.props.task.length : null,
       autoFocus:true,
-      placeholder: this.props.task,
+      defaultValue: this.props.task,
       onBlur: this.finishEdit.bind(this),
       onKeyPress: this.checkEnter.bind(this)});
   }
   renderNote() {
     return div(
       {onClick: this.edit.bind(this)},
-      this.props.task);
+      [
+        span({className: 'task'}, this.props.task),
+        this.props.onDelete ? this.renderDelete() : null
+      ]);
+  }
+  renderDelete() {
+    return button({className: "delete-note", onClick: this.props.onDelete}, "x");
   }
   edit() {
     this.setState({

@@ -2,16 +2,24 @@ import React from 'react';
 import uuid from 'node-uuid';
 import Note from './Note';
 
+import h from 'react-hyperscript'
+const { div, ul, li, span, h1 } = require('hyperscript-helpers')(h);
+//const {Note} = require('hyperscript-helpers')(note);
 
-var Notes = ({notes, onEdit}) => {
-  return (
-      <ul>{notes.map((note) =>
-                     <li key={note.id}>
-                     <Note task={note.task} onEdit={onEdit.bind(null, note.id)}/>
-                     </li>
-                    )}
-    </ul>);
-}
+const Notes = ({notes, onEdit, onDelete}) => {
+  return ul({className: "notes"}, notes.map((note) => {
+    return li(
+      {className: "note", key: note.id},
+      h(
+        Note,
+        {
+          task: note.task, 
+          onEdit: onEdit.bind(null, note.id),
+          onDelete: onDelete.bind(null, note.id)
+        },
+        []));
+  }));
+};
 
 
 
@@ -38,11 +46,20 @@ export default class App extends React.Component {
   render() {
     return (
         <div>
-        <button onClick={this.addNote}>+</button>
-        <Notes notes={this.state.notes} onEdit={this.editNote} />
+        <button className="add-note" onClick={this.addNote}>+</button>
+        <Notes
+      notes={this.state.notes}
+      onEdit={this.editNote}
+      onDelete={this.deleteNote} />
         </div>
     );
   }
+
+  deleteNote = (id) => {
+    this.setState({
+      notes: this.state.notes.filter((note) => note.id !== id)
+    });
+  };
   
   addNote = () => {    
     this.setState({
